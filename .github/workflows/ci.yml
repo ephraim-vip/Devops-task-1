@@ -1,3 +1,4 @@
+
 name: CI Pipeline
 
 on:
@@ -13,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ["18.x", "20.x"]
+        node-version: ["18.x", "20.x"]   # Test sur 2 versions Node
 
     steps:
       - name: Checkout du code
@@ -23,10 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'npm'                    # Cache automatique des node_modules
 
       - name: Installation des dépendances
-        run: npm ci
+        run: npm ci                       # npm ci est plus strict que npm install
 
       - name: Lint du code
         run: npm run lint || true
